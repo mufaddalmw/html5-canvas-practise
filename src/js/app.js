@@ -4,7 +4,7 @@ c.height = window.innerHeight;
 const ctx = c.getContext("2d");
 
 let circleArray = [];
-for (let step = 0; step < 50; step++) {
+for (let step = 0; step < 100; step++) {
     const x = Math.random() * innerWidth
     const y = Math.random() * innerHeight;
     circleArray.push(new Circle(x, y))
@@ -14,19 +14,21 @@ for (let step = 0; step < 50; step++) {
 function Circle(x, y) {
     this.x = x
     this.y = y
-    this.dx = (Math.random() - 0.5) * 8
-    this.dy = (Math.random() - 0.5) * 8
-    this.radius = 20
+    this.dx = (Math.random() - 0.5) * 6
+    this.dy = (Math.random() - 0.5) * 6
+    this.radius = Math.random() * 9 + 5
+    this.minRadius = Math.random() * 9 + 5
+    this.maxRadius = 40
     this.mouseX = undefined
     this.mouseY = undefined
+    this.colorCode = ['red', 'blue', 'green', 'purple', 'grey']
+    this.color = this.colorCode[Math.floor(Math.random() * this.colorCode.length)]
     
     
-
-
     this.draw = () => {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-        ctx.strokeStyle = 'blue'
+        ctx.strokeStyle = this.color
         ctx.stroke();
 
     }
@@ -43,16 +45,13 @@ function Circle(x, y) {
         if (this.y + this.radius > innerHeight || this.y - this.radius < 0) { this.dy = -this.dy }
         this.x += this.dx
         this.y += this.dy
-        
         if (this.mouseX - this.x < 50 && this.mouseX - this.x > -50 && this.mouseY - this.y < 50 && this.mouseY - this.y > -50 ) {
-            this.radius += 1
+            if (this.radius < this.maxRadius) this.radius += 1
         }
-        // else if () {}
-        // else {this.radius -= 1}
-        // console.log(this.mouseX, this.x)
-
+        else if (this.radius > this.minRadius) {
+            this.radius -= 1
+        }
         this.draw()
-
     }
 
     // this.animate = () => {
