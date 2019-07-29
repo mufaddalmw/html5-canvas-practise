@@ -21,7 +21,7 @@ function Circle(x, y) {
     this.maxRadius = 40
     this.mouseX = undefined
     this.mouseY = undefined
-    this.colorCode = ['red', 'blue', 'green', 'purple', 'grey']
+    this.colorCode = ['#BB4043', '#4073B8', '#EFBA3A', '#B3640F', '#5D1314']
     this.color = this.colorCode[Math.floor(Math.random() * this.colorCode.length)]
     
     
