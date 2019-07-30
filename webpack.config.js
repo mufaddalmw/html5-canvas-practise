@@ -27,7 +27,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
-	entry: './src/index.js',
+	entry: {
+		style: ['./src/scss/app.scss'],
+		home: ['./src/js/app.js'],
+		sine_waves: ['./src/js/sine-waves.js'],
+	},
 
 	output: {
 		filename: '[name].[chunkhash].js',
@@ -39,7 +43,13 @@ module.exports = {
 		// new HtmlWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
-			template: 'src/index.html'
+			template: 'src/index.html',
+			excludeChunks: ['sine_waves']
+		}),
+		new HtmlWebpackPlugin({
+			filename: 'sine-waves.html',
+			template: 'src/sine-waves.html',
+			excludeChunks: ['home']
 		})
 	],
 
