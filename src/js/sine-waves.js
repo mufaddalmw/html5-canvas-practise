@@ -3,28 +3,33 @@ c.width = window.innerWidth;
 c.height = window.innerHeight;
 const ctx = c.getContext("2d");
 
-// let circleArray = [];
-for (let step = 0; step < c.width; step++) {
-    const x = Math.random() * innerWidth
-    const y = Math.random() * innerHeight
-    new Line(i, c.height / 2 + Math.sin(i * 0.01) * 100)
-}
+const grd = ctx.createLinearGradient(0, 0, 0, c.height);
+grd.addColorStop(0, "#262626");
+grd.addColorStop(1, "#404040");
 
-function Line(item1, item2) {
-    ctx.moveTo(0, 0)
+ctx.fillStyle = grd
+ctx.fillRect(0, 0, c.width, c.height)
+
+function Star(){
+    this.x = 100;
+    this.y = 75;
+    this.radius = 50;
     
-    ctx.lineTo(3300, 3400)
-
-    ctx.stroke()
 }
 
+Star.prototype.draw = function() {
+    ctx.beginPath();
+    
+    ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+    
+    ctx.fillStyle = "#D9D9D9";
+    ctx.fill()
 
+}
 
-// funct ion animate() {
-//     requestAnimationFrame(animate)
-//     ctx.clearRect(0, 0, innerWidth, innerHeight)
-//     for (let step = 0; step < circleArray.length; step++) {
-//         // circleArray[step].update()
-//     }
+// for (let index = 0; index < array.length; index++) {
+//     const element = array[index];
+    
 // }
-// animate()
+const star = new Star()
+star.draw()
